@@ -4,7 +4,11 @@ module.exports = {
   content: ['./templates/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
     colors,
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        'container': '1fr min(100%)',
+      },
+    },
   },
   plugins: [],
 }
