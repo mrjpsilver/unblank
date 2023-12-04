@@ -6,7 +6,7 @@ module.exports = {
     colors,
     extend: {
       gridTemplateRows: {
-        'container': '1fr min(100%)',
+        'container': 'auto 1fr',
       },
     },
   },

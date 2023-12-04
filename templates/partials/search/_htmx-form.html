@@ -1,0 +1,18 @@
+<div id="search-ui">
+  <form action="{{ action }}" method="GET" class="flex items-end">
+    <div class="flex">
+      <select name="action" hx-post="{% url 'search_form' %}" hx-trigger="change" hx-target="#search-ui" hx-swap="outerHTML" class="appearance-none border border-gray-300 text-gray-900 text-sm rounded-md rounded-r-none border-r-0 p-2.5 min-w-[8rem]" id="search_engine">
+        <option value="//www.google.com/search" {% if action == "//www.google.com/search" %}selected="selected"{% endif %}>Google</option>
+        <option value="//www.bing.com/search" {% if action == "//www.bing.com/search" %}selected="selected"{% endif %}>Bing</option>
+        <option value="//duckduckgo.com" {% if action == "//duckduckgo.com" %}selected="selected"{% endif %}>DuckDuckGo</option>
+      </select>
+      <div class="relative flex">
+        <input type="text" id="search" name="q" class="border border-gray-300 py-2 pl-3 pr-14 rounded-md rounded-l-none" placeholder="Search" required />
+        <div class="absolute right-0 top-0 py-1.5 pr-1.5 flex">
+          <kbd class="px-2 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-600 tracking-widest select-none">⌘K</kbd>
+        </div>
+      </div>
+      <button type="submit" class="border border-gray-300 text-gray-900 text-sm rounded-md p-2.5 ml-3">Search</button>
+    </div>
+  </form>
+</div>
