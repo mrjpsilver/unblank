@@ -3,20 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block head_title %}Unblank{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block head_title %}un_{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script defer src="{% static 'js/app.js' %}"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
   </head>
-  <body class="antialiased h-full" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <div class="grid grid-rows-container min-h-screen">
-      <div class="p-5 border border-b-orange-500 border-b-2">
-        Logo
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <div class="grid grid-rows-container min-h-screen w-screen">
+      <div class="p-5 border border-b-orange-500 border-b-2 text-orange-600">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 202.41 118.88" class="h-10 w-auto">
+          <path fill="currentColor" d="m184.73,0H17.68C7.91,0,0,7.91,0,17.68v83.52c0,9.76,7.91,17.68,17.68,17.68h167.06c9.76,0,17.68-7.91,17.68-17.68V17.68c0-9.76-7.91-17.68-17.68-17.68Zm-115.62,68.82c0,14.67-6.64,20.97-22.19,20.97s-22.28-6.29-22.28-20.97V29.33h13.1v39.05c0,7.43,2.54,10.13,9.35,10.13s9.35-2.71,9.35-10.13V29.33h12.66v39.49Zm58.39,19.92h-12.5l-21.57-40.01v40.01h-12.41V29.33h13.89l20.18,37.48V29.33h12.41v59.41Zm50.26,12.49h-43.68v-9.08h43.68v9.08Z" />
+        </svg>
       </div>
-      {% block content %}
-      {% endblock %}
+      {% block content %}{% endblock %}
+      <div>
+        <div class="mt-2 p-5 sm:mt-0 border border-t-orange-500 border-t-2 text-orange-600 text-sm text-center">
+          &copy; {% now "Y" %} Unblank. All rights reserved.
+        </div>
+      </div>
     </div>
     <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
     <script type="text/javascript">
@@ -27,4 +34,3 @@
     </script>
   </body>
 </html>
-        

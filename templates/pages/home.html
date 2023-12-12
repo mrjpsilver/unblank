@@ -2,50 +2,8 @@
 {% load static %}
 
 {% block content %}
-<div class="p-5 flex flex-col items-center justify-center" x-data x-cloak>
+<div class="p-5 flex flex-col items-center" x-data x-cloak>
   {% include "partials/search/_alpine-form.html" %}
-  <div class="mt-5 min-w-[600px] border border-fuchsia-500 p-5" x-data="{ addLinkOpen: false }" @keydown.escape="addLinkOpen = false">
-    <div class="flex justify-between items-center">
-      <h1 class="text-2xl text-fuchsia-500 font-bold">Links</h1>
-      <div class="flex gap-2">
-        <button @click="addLinkOpen = true; if (open) $nextTick(()=>{$refs.input.focus()});" class="bg-fuchsia-500 text-sm text-white rounded-lg py-1 px-1.5">Add link</button>
-        <button @click="$store.links.displayList = !$store.links.displayList" class="bg-fuchsia-500 text-sm text-white rounded-lg py-1 px-1.5" x-text="$store.links.displayList ? 'Grid' : 'List'"></button>
-      </div>
-    </div>
-    <ul>
-      <template x-for="link in $store.links.entries" :key="link.id">
-        <li class="flex py-2 border-b border-gray-300 last:border-none justify-between items-center">
-          <a :href="link.url">
-            <img :src="favIcon(link.url)" class="w-10 h-10 inline-block" />
-          </a>
-          <a :href="link.url" x-text="link.name" class="text-orange-600 hover:underline hover:underline-offset-1"></a>
-          <span x-text="formatDateTime(link.created_at)"></span>
-          <button @click="$store.links.remove(link.id)">Remove</button>
-        </li>
-      </template>
-    </ul>
-    <template x-teleport="body" @keydown.escape="addLinkOpen = false">
-      <div x-show="addLinkOpen" x-transition class="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-30 p-40">
-        <div class="bg-white rounded-lg p-5 md:max-w-[400px] mx-auto" @click.away="addLinkOpen = false">
-          <h2 class="text-xl font-semibold text-fuchsia-500">Add link</h2>
-          <form @submit.prevent.stop="$store.links.add($event); $event.target.reset(); addLinkOpen = false">
-            <div class="flex flex-col">
-              <label class="text-sm" for="name">Name</label>
-              <input type="text" name="name" id="name" x-ref="input" class="border border-gray-300 rounded-lg p-2" autocomplete="off" required />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-sm" for="url">URL</label>
-              <input type="url" name="url" pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?" id="url" class="border border-gray-300 rounded-lg p-2" autocomplete="off" required />
-              <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Must follow pattern <code>https://example.com</code></p>
-            </div>
-            <button type="submit" class="bg-fuchsia-500 text-white rounded-lg p-2 mt-2">Add</button>
-          </form>
-        </div>
-      </div>
-    </template>
-  </div>
-</div>
-
-
+  {% include "partials/links/_alpine-links.html" %}
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-<div id="search-ui" x-data>
+<div id="search-ui" x-data class="my-4 md:mt-8 md:mb-6">
   <form method="GET" :action="$store.search.action" class="flex items-end">
     <div class="flex">
       <select name="action" x-model="$store.search.action" class="appearance-none border border-gray-300 text-gray-900 text-sm rounded-md rounded-r-none border-r-0 p-2.5 min-w-[8rem]" id="search_engine">
@@ -7,12 +7,12 @@
         <option value="//duckduckgo.com">DuckDuckGo</option>
       </select>
       <div class="relative flex">
-        <input type="search" id="search" name="q" x-model="$store.search.q" onfocus="this.select();" class="border border-gray-300 py-2 pl-3 pr-14 rounded-md rounded-l-none" placeholder="Search" required />
-        <div class="absolute right-0 top-0 py-1.5 pr-1.5 flex">
+        <input type="search" id="search" name="q" x-model="$store.search.q" onfocus="this.select();" class="border border-gray-300 py-2 px-3 sm:pr-14 rounded-md rounded-l-none" placeholder="Search" required enterkeyhint="search" />
+        <div class="hidden absolute right-0 top-0 py-1.5 pr-1.5 sm:flex">
           <kbd class="px-2 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-600 tracking-widest select-none">⌘K</kbd>
         </div>
       </div>
-      <button type="submit" class="border border-gray-300 text-gray-900 text-sm rounded-md p-2.5 ml-3">Search</button>
+      <button type="submit" class="hidden sm:inline-block border border-gray-300 text-gray-900 text-sm rounded-md p-2.5 ml-3">Search</button>
     </div>
   </form>
 </div>

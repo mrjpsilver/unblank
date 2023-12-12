@@ -6,7 +6,11 @@ module.exports = {
     colors,
     extend: {
       gridTemplateRows: {
-        'container': 'auto 1fr',
+        'container': 'auto 1fr auto',
+      },
+      gridTemplateColumns: {
+        'links-list': 'auto 1fr auto',
+        'links-list-md': 'auto 1fr auto auto',
       },
     },
   },
