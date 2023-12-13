@@ -22,3 +22,52 @@ select.appearance-none {
 }
 
 [x-cloak] { display: none !important; }
+
+.offcanvas-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+  visibility: hidden;
+}
+.offcanvas-wrapper.active {
+  visibility: visible;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.offcanvas-panel {
+  position: fixed;
+  min-height: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  width: 320px;
+  overflow-y: auto;
+  transition: all .3s ease-in-out;
+}
+
+.offcanvas-panel-right {
+  right: 0;
+  transform: translateX(110%);
+}
+
+.offcanvas-panel-left {
+  left: 0;
+  transform: translateX(-110%);
+}
+.offcanvas-panel.active {
+  transform: translateX(0);
+}

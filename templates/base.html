@@ -13,10 +13,18 @@
   </head>
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     <div class="grid grid-rows-container min-h-screen w-screen">
-      <div class="p-5 border border-b-orange-500 border-b-2 text-orange-600">
+      <div class="p-5 border border-b-orange-500 border-b-2 text-orange-600 flex justify-between items-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 202.41 118.88" class="h-10 w-auto">
           <path fill="currentColor" d="m184.73,0H17.68C7.91,0,0,7.91,0,17.68v83.52c0,9.76,7.91,17.68,17.68,17.68h167.06c9.76,0,17.68-7.91,17.68-17.68V17.68c0-9.76-7.91-17.68-17.68-17.68Zm-115.62,68.82c0,14.67-6.64,20.97-22.19,20.97s-22.28-6.29-22.28-20.97V29.33h13.1v39.05c0,7.43,2.54,10.13,9.35,10.13s9.35-2.71,9.35-10.13V29.33h12.66v39.49Zm58.39,19.92h-12.5l-21.57-40.01v40.01h-12.41V29.33h13.89l20.18,37.48V29.33h12.41v59.41Zm50.26,12.49h-43.68v-9.08h43.68v9.08Z" />
         </svg>
+        <div x-data="{}">
+          <button class="p-2 bg-orange-500 rounded-full text-white" @click="$dispatch('offcanvas-config')">
+            <span class="sr-only">Open configuration menu</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-8 w-8">
+              <path fill-rule="evenodd" d="M8.34 1.804A1 1 0 0 1 9.32 1h1.36a1 1 0 0 1 .98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 0 1 1.262.125l.962.962a1 1 0 0 1 .125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 0 1 .804.98v1.361a1 1 0 0 1-.804.98l-1.473.295a6.95 6.95 0 0 1-.587 1.416l.834 1.25a1 1 0 0 1-.125 1.262l-.962.962a1 1 0 0 1-1.262.125l-1.25-.834a6.953 6.953 0 0 1-1.416.587l-.294 1.473a1 1 0 0 1-.98.804H9.32a1 1 0 0 1-.98-.804l-.295-1.473a6.957 6.957 0 0 1-1.416-.587l-1.25.834a1 1 0 0 1-1.262-.125l-.962-.962a1 1 0 0 1-.125-1.262l.834-1.25a6.957 6.957 0 0 1-.587-1.416l-1.473-.294A1 1 0 0 1 1 10.68V9.32a1 1 0 0 1 .804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 0 1 .125-1.262l.962-.962A1 1 0 0 1 5.38 3.03l1.25.834a6.957 6.957 0 0 1 1.416-.587l.294-1.473ZM13 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
       </div>
       {% block content %}{% endblock %}
       <div>
@@ -32,5 +40,22 @@
         return false;
       });
     </script>
+    <div x-data="{ offcanvas: false }">
+      <div
+        class="offcanvas-wrapper"
+        :class="{ 'active': offcanvas }"
+        x-on:offcanvas-config.window="offcanvas = !offcanvas"
+        >
+        <div class="backdrop" x-show="offcanvas" @click="offcanvas = false"></div>
+        <div class="offcanvas-panel offcanvas-panel offcanvas-panel-right bg-orange-500 text-white p-2" :class="{ 'active': offcanvas }">
+          <div class="flex flex-end mb-3">
+            <button class="btn btn-sm btn-primary btn-icon rounded-full" @click="offcanvas = false">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+          <p>An off-canvas panel, yo!</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
