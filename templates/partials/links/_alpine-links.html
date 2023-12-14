@@ -1,8 +1,8 @@
-<div class="w-full md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]" x-data="{ addLinkOpen: false, editLinkOpen: false }" @keydown.escape="addLinkOpen = false; editLinkOpen = false">
+<div class="w-full md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]" x-data="{}">
   <div class="flex justify-between items-center my-4">
     <h1 class="text-2xl text-fuchsia-500 font-bold">Links</h1>
     <div class="flex gap-2">
-      <button @click="addLinkOpen = true; if (addLinkOpen) $nextTick(()=>{$refs.input.focus()});" class="bg-fuchsia-500 text-sm text-white rounded-md py-1 px-2.5 hover:bg-fuchsia-400">Add link</button>
+      <button @click="$dispatch('modal-link-add')" class="bg-fuchsia-500 text-sm text-white rounded-md py-1 px-2.5 hover:bg-fuchsia-400">Add link</button>
       <div class="inline-flex rounded-md" role="group">
         <button type="button" @click="$store.links.displayList = true" class="px-3 py-2 text-white bg-fuchsia-500 rounded-s-md hover:bg-fuchsia-400 focus:z-10" :class="$store.links.displayList && 'bg-fuchsia-700 hover:bg-fuchsia-700'">
           <span class="sr-only">List view</span>
@@ -29,7 +29,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <button class="bg-slate-600 p-1.5 rounded-md h-6 w-6 text-sm font-bold text-gray-300 hover:text-white" @click.stop="editLinkOpen = true; if (editLinkOpen) $nextTick(()=>{$store.links.edit(link.id)});">
+          <button class="bg-slate-600 p-1.5 rounded-md h-6 w-6 text-sm font-bold text-gray-300 hover:text-white" @click.stop="$dispatch('modal-link-edit', link.id)">
             <span class="sr-only">Edit link</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
@@ -47,13 +47,13 @@
         </a>
         <a :href="link.url" x-text="link.name" class="text-white hover:underline hover:underline-offset-1 px-4"></a>
         <span x-text="formatDateTime(link.created_at)" class="hidden md:inline-block"></span>
-        <button class="bg-slate-600 ms-3 p-1.5 rounded-md h-6 w-6 text-sm font-bold text-gray-300 hover:text-white" @click.stop="editLinkOpen = true; if (editLinkOpen) $nextTick(()=>{$store.links.edit(link.id)});">
+        <button class="bg-slate-600 ms-3 p-1.5 rounded-md h-6 w-6 text-sm font-bold text-gray-300 hover:text-white" @click.stop="$dispatch('modal-link-edit', link.id)">
           <span class="sr-only">Edit link</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
           </svg>          
         </button>
-        <button class="bg-slate-600 ms-3 px-1 rounded-full h-6 w-6 text-sm font-bold text-gray-300 hover:text-white" @click.stop="$store.links.remove(link.id)">
+        <button class="bg-slate-600 ms-3 px-1 rounded-full h-6 w-6 text-gray-300 hover:text-white" @click.stop="$store.links.remove(link.id)">
           <span class="sr-only">Remove link</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -62,6 +62,4 @@
       </li>
     </template>
   </ul>
-  {% include "partials/links/_add-modal.html" %}
-  {% include "partials/links/_edit-modal.html" %}
 </div>

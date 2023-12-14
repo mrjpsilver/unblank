@@ -1,8 +1,13 @@
-<template x-teleport="body" @keydown.escape="editLinkOpen = false">
-  <div x-show="editLinkOpen" x-transition class="fixed top-0 left-0 bottom-0 right-0 h-full w-full bg-black bg-opacity-30 pt-36 px-5 sm:pt-0 sm:grid sm:place-items-center">
-    <div class="bg-white rounded-lg p-5 md:max-w-[400px] mx-auto" @click.away="editLinkOpen = false">
+<div x-data="{ display: false }" @keydown.escape="display = false">
+  <div
+    x-show="display"
+    x-transition
+    x-on:modal-link-edit.window="display = !display; if (display) { $store.links.edit($event.detail); $nextTick(() => $refs.input.focus()); }"
+    class="fixed top-0 left-0 bottom-0 right-0 h-full w-full bg-black bg-opacity-30 pt-36 px-5 sm:pt-0 sm:grid sm:place-items-center"
+  >
+    <div class="bg-white rounded-lg p-5 md:max-w-[400px] mx-auto" @click.away="display = false">
       <h2 class="text-xl font-semibold text-fuchsia-500">Edit link</h2>
-      <form id="edit-link-form" @submit.prevent.stop="$store.links.save($event); $event.target.reset(); editLinkOpen = false">
+      <form id="edit-link-form" @submit.prevent.stop="$store.links.save($event); $event.target.reset(); display = false">
         <input type="hidden" name="id" />
         <div class="flex flex-col">
           <label class="text-sm my-2" for="name">Name</label>
@@ -14,9 +19,9 @@
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Must follow pattern <code>https://example.com</code></p>
         </div>
         <div class="flex justify-between">
-          <button type="reset" @click="editLinkOpen = false" class="bg-gray-300 text-black rounded-lg py-2 px-4 mt-2">Cancel</button>
+          <button type="reset" @click="display = false" class="bg-gray-300 text-black rounded-lg py-2 px-4 mt-2">Cancel</button>
           <button type="submit" class="bg-fuchsia-500 text-white rounded-lg py-2 px-4 mt-2">Save</button>
       </form>
     </div>
   </div>
-</template>
+</div>
